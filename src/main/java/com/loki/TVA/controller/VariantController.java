@@ -3,6 +3,7 @@ package com.loki.TVA.controller;
 import com.loki.TVA.dto.VariantRequestDTO;
 import com.loki.TVA.dto.VariantResponseDTO;
 import com.loki.TVA.service.VariantService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class VariantController {
 
 //    create variants
     @PostMapping("/variant")
-    public ResponseEntity<VariantResponseDTO> createVariant(@RequestBody VariantRequestDTO request){
+    public ResponseEntity<VariantResponseDTO> createVariant(@Valid @RequestBody VariantRequestDTO request){
                 VariantResponseDTO variant = service.createVariant(request);
                 return ResponseEntity.status(HttpStatus.CREATED).body(variant);
 
@@ -41,7 +42,7 @@ public class VariantController {
 
 //    update variants by id
     @PatchMapping("/variant/{id}")
-    public ResponseEntity<VariantResponseDTO> updateVariantById(@PathVariable Long id, VariantRequestDTO request){
+    public ResponseEntity<VariantResponseDTO> updateVariantById(@PathVariable Long id, @Valid @RequestBody VariantRequestDTO request){
         VariantResponseDTO variant = service.updateVariantById(id,request);
         return ResponseEntity.status(HttpStatus.CREATED).body(variant);
     }
